@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nagul K</title>
+<meta name="description" content="Nagul K: AI and backend engineer (intern). LLM pipelines, RAG and embeddings, Python, PostgreSQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* VOICE work: an engineer's portfolio, exact and calm
+   IDEA an engineering datasheet for one builder: title strip, spec panels, a block diagram
+   PICTURE a block diagram of Quip: two LLMs in parallel, a verifier, structured JSON out
+   COLOUR cobalt #1240e0 strip, white, black, pale #eef2ff zones; night #0a0d18
+   TYPE DM Serif Display (as on richpole.live) + Inter
+   LAYOUT laptop: title + facts left, diagram right in one strip; phone: title, diagram, links */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0a0d18);--ink:light-dark(#0b0d12,#e9ecf5);--mute:light-dark(#4a5162,#a3abc2);--zone:light-dark(#eef2ff,#121831);--line:light-dark(#d5dbef,#26304f);--cob:#1240e0;--cobt:light-dark(#1240e0,#7d9bff);--card:light-dark(#ffffff,#0e1326)}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "DM Sans",system-ui,sans-serif;overflow-x:clip}
+a{color:var(--cobt);text-decoration-thickness:1px;text-underline-offset:3px}
+h1,h2,h3{font-family:"DM Serif Display",Georgia,serif;font-weight:400;letter-spacing:-.02em;line-height:1.05;margin:0;font-weight:400}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding-block:clamp(28px,4vw,64px);padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+nav{position:sticky;top:0;z-index:5;background:var(--cob);color:#fff}
+nav .wrap{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;padding:12px max(5vw,16px)}
+nav b{font-weight:400;font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:18px;margin-right:auto}
+nav a{color:#fff;text-decoration:none;font-size:15px;padding:6px 0}
+nav a:hover,nav a:focus-visible{text-decoration:underline}
+.hero{background:var(--cob);color:#fff;padding-top:clamp(20px,3vw,40px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:stretch}
+.hero h1{font-size:clamp(44px,7vw,84px)}
+.role{font-family:"DM Sans",sans-serif;font-size:clamp(22px,2.4vw,28px);font-weight:400;margin:14px 0 12px;text-wrap:balance}
+.hero p.lead{font-size:17px;max-width:34em;margin:0 0 20px;color:#e3e9ff}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1.5px solid #fff;color:#fff;text-decoration:none;font-weight:600;font-size:15px;border-radius:4px}
+.btn.solid{background:#fff;color:var(--cob)}
+.btn:hover,.btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:26px;border-top:1px solid rgba(255,255,255,.35)}
+.facts div{padding:12px 12px 0 0}
+.facts strong{font-weight:400;display:block;font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:clamp(24px,3vw,34px);white-space:nowrap}
+.facts span{font-size:14px;color:#d6defe}
+.diagram{margin:0;align-self:center;background:#0b2ab0;border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.diagram .cap{font-size:14px;color:#d6defe;margin:0}
+.flow{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,1fr);align-items:center;padding:10px 0}
+.col{display:flex;flex-direction:column;gap:10px}
+.node{background:#fff;color:#0b0d12;border-radius:4px;padding:10px 12px;font-size:14px;line-height:1.3;box-shadow:0 3px 0 #061a75}
+.node b{font-weight:600;display:block;font-family:"DM Sans",sans-serif;font-size:15px;margin-bottom:2px}
+.node.dark{background:#061a75;color:#fff;box-shadow:0 3px 0 #03104a}
+.node.out{background:#ffe24a}
+.arrow{height:2px;background:#fff;position:relative;margin:0 4px}
+.arrow::after{content:"";position:absolute;right:-1px;top:-4px;border:5px solid transparent;border-left:7px solid #fff;border-right:0}
+pre.json{margin:0;background:#061a75;color:#fff;border-radius:4px;padding:10px 12px;font:13px/1.45 ui-monospace,Menlo,monospace;overflow-x:auto}
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 3px 0 #061a75}50%{box-shadow:0 3px 0 #061a75,0 0 0 4px rgba(255,226,74,.55)}}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+h2{font-size:clamp(32px,4vw,46px);margin-bottom:8px}
+.sub{color:var(--mute);margin:0 0 26px;max-width:40em}
+.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px;display:flex;flex-direction:column}
+.proj.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px}
+.proj h3{font-size:24px}
+.meta{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px;color:var(--mute);margin:8px 0 12px}
+.meta a{font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;padding:0;list-style:none}
+.tags li{font-size:13px;background:var(--zone);color:var(--ink);padding:3px 9px;border-radius:3px}
+.proj ul.pts{margin:0;padding-left:18px}
+.proj ul.pts li{margin-bottom:6px}
+.stat{display:flex;gap:20px;flex-wrap:wrap;margin-top:auto;padding-top:14px}
+.stat div{font-size:14px;color:var(--mute)}
+.stat strong{font-weight:400;display:block;font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:28px;color:var(--cobt);white-space:nowrap}
+.zone{background:var(--zone)}
+.other{margin-top:18px;font-size:15px;color:var(--mute)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px}
+.panel h3{font-size:20px;margin-bottom:10px}
+.panel p{margin:0 0 6px;font-size:15px}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(16em,1fr));gap:14px}
+.skills .panel h3{font-size:17px}
+footer{background:var(--cob);color:#fff}
+footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+footer h2{color:#fff;font-size:clamp(28px,3.4vw,40px)}
+footer p{margin:6px 0 0;color:#d6defe}
+.mail{font-weight:600;color:#fff;overflow-wrap:anywhere}
+@media(max-width:900px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.proj.wide{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:700px){.projects,.grid3{grid-template-columns:minmax(0,1fr)}.flow{grid-template-columns:minmax(0,1fr);gap:10px}.arrow{width:2px;height:18px;margin:0 auto}.arrow::after{right:-4px;top:auto;bottom:-1px;border:5px solid transparent;border-top:7px solid #fff;border-bottom:0}nav a.opt{display:none}}
+@media(max-width:420px){.facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<nav aria-label="Main"><div class="wrap">
+  <b>Nagul K</b>
+  <a href="#projects">Projects</a>
+  <a href="#experience" class="opt">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</div></nav>
+
+<header class="hero band">
+  <div class="wrap">
+    <div>
+      <h1>Nagul K</h1>
+      <p class="role">AI and backend engineer (intern). I build LLM and retrieval systems and ship production software to real users.</p>
+      <p class="lead">Third-year B.Tech IT student in Coimbatore, India. I build multi-model LLM pipelines with structured outputs and RAG over vector embeddings, and I launched and run a live platform with my own PostgreSQL schema, Docker deploys on AWS and CI/CD.</p>
+      <div class="links">
+        <a class="btn solid" href="https://github.com/Nagul-7">GitHub</a>
+        <a class="btn" href="https://linkedin.com/in/nagul-k-8888a5328">LinkedIn</a>
+        <a class="btn" href="https://richpole.live">richpole.live</a>
+        <a class="btn" href="#contact">Email</a>
+      </div>
+      <div class="facts">
+        <div><strong>~1,600</strong><span>automated tests gating RichPole releases</span></div>
+        <div><strong>3</strong><span>LLM providers orchestrated in Quip</span></div>
+        <div><strong>1st</strong><span>place, CTFQuest x GrootX final, 2026</span></div>
+      </div>
+    </div>
+    <figure class="diagram" aria-label="Block diagram of the Quip pipeline">
+      <p class="cap">How Quip works: two models in parallel, a verifier, structured output.</p>
+      <div class="flow">
+        <div class="col">
+          <div class="node"><b>News sentiment</b>Llama 3.3 on Groq</div>
+          <div class="node"><b>Fundamentals</b>Gemini 2.5 Flash + RAG over SEC 10-K/10-Q</div>
+        </div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="col">
+          <div class="node dark"><b>Verifier</b>Claude Haiku cross-checks both and flags conflicts</div>
+          <div class="node dark"><b>Fallback</b>Rule-based when a model is down</div>
+        </div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node out pulse"><b>Pydantic result</b>signal, probability, reasoning</div>
+      </div>
+      <pre class="json">{ "signal": "...", "probability": 0.0, "reasoning": "..." }</pre>
+    </figure>
+  </div>
+</header>
+
+<section class="band" id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="sub">LLM pipelines, retrieval and ranking, and one production platform I own end to end.</p>
+    <div class="projects">
+      <article class="proj wide">
+        <div>
+          <h3>RichPole: live trading-education platform</h3>
+          <div class="meta"><a href="https://richpole.live">richpole.live</a><span>Launched Nov 2026</span></div>
+          <p style="margin:0">Turns viewers of my RichPole YouTube channel into members: sign-up, learning, XP leaderboard. Built as a core plus 12 feature modules with an event bus and a background job worker. I own it from system design to operations.</p>
+          <div class="stat">
+            <div><strong>12</strong>feature modules</div>
+            <div><strong>30+</strong>rate limits</div>
+            <div><strong>5</strong>required CI checks</div>
+          </div>
+        </div>
+        <div>
+          <ul class="pts">
+            <li>Designed the PostgreSQL data model and queries (Drizzle ORM) with a least-privilege database role and an append-only audit log. Zod validation on every API route; a security review found and fixed a LIKE-pattern injection.</li>
+            <li>GitHub Actions CI/CD to AWS Lightsail with Docker Compose behind a Cloudflare Tunnel. Each deploy backs up, migrates, health-checks and rolls back automatically on failure. Nightly encrypted backups go to Cloudflare R2.</li>
+            <li>About 1,600 tests: 470 unit, 940 integration on real Postgres and Valkey, 190 Playwright end-to-end.</li>
+            <li>Switched email from AWS SES to Brevo the same day AWS denied SES production access.</li>
+          </ul>
+          <ul class="tags"><li>Next.js 16</li><li>TypeScript</li><li>PostgreSQL</li><li>Drizzle ORM</li><li>Valkey</li><li>Docker</li><li>GitHub Actions</li><li>AWS</li><li>Cloudflare</li></ul>
+        </div>
+      </article>
+
+      <article class="proj">
+        <h3>Quip: multi-model LLM financial analyst</h3>
+        <div class="meta"><a href="https://github.com/Nagul-7/Quip">github.com/Nagul-7/Quip</a></div>
+        <ul class="pts">
+          <li>FastAPI service running two LLM pipelines in parallel, returning a structured result validated with Pydantic models.</li>
+          <li>Claude Haiku verification step that cross-checks both outputs and flags conflicts, plus a rule-based fallback.</li>
+          <li>RAG over SEC filings with sentence-transformer embeddings and ChromaDB, Redis caching and a scheduled morning brief.</li>
+        </ul>
+        <ul class="tags"><li>Python</li><li>FastAPI</li><li>Pydantic</li><li>LangChain</li><li>ChromaDB</li><li>Redis</li></ul>
+      </article>
+
+      <article class="proj">
+        <h3>AI Twin: local RAG assistant with memory</h3>
+        <div class="meta"><a href="https://github.com/Nagul-7/AI-Twin">github.com/Nagul-7/AI-Twin</a></div>
+        <ul class="pts">
+          <li>Fully local assistant that answers only from retrieved document context, using nomic-embed-text embeddings in ChromaDB.</li>
+          <li>Persistent JSON-based memory and a Flask chat interface.</li>
+        </ul>
+        <ul class="tags"><li>Python</li><li>Ollama</li><li>LangChain</li><li>ChromaDB</li><li>Flask</li></ul>
+      </article>
+
+      <article class="proj">
+        <h3>FraudLens: risk ranking system</h3>
+        <div class="meta"><span>Smart India Hackathon 2026</span></div>
+        <p style="margin:0">Ranks districts by fraud cash-out risk, evaluated against a static hotspot list on synthetic test data.</p>
+        <div class="stat">
+          <div><strong>56.7%</strong>of cash-outs caught by the top 25 ranked districts</div>
+          <div><strong>21.6%</strong>for the static baseline</div>
+        </div>
+        <ul class="tags"><li>Python</li><li>LightGBM</li><li>FastAPI</li><li>React</li></ul>
+      </article>
+
+      <article class="proj">
+        <h3>ExploitX CTF: challenge author</h3>
+        <div class="meta"><a href="https://github.com/Nagul-7/pwn">github.com/Nagul-7/pwn</a></div>
+        <p style="margin:0">Authored 7 binary-exploitation challenges (4 medium, 3 hard or expert), each packaged in Docker with a solve script.</p>
+        <ul class="tags"><li>Security</li><li>Docker</li><li>Linux</li></ul>
+      </article>
+    </div>
+    <p class="other"><strong>Also built:</strong> SecureOps-AI, a Python CLI that merges Bandit, Semgrep, Trivy and Checkov findings into one graded report; LogiCore, a Node.js, PostgreSQL and Socket.io logistics platform (2026 hackathon).</p>
+  </div>
+</section>
+
+<section class="band zone" id="experience">
+  <div class="wrap">
+    <h2>Experience and education</h2>
+    <p class="sub">Startup work, competitions and school.</p>
+    <div class="grid3">
+      <div class="panel">
+        <h3>Eagle Eyes Cyber Solutions</h3>
+        <p><strong>Collaborator, Cybersecurity Solutions</strong> · Bangalore</p>
+        <p style="color:var(--mute)">Jun 2026 to Jul 2026</p>
+        <p>Worked with the founder on a low-cost cyber-crime response workflow for Chandigarh Police, built on existing national systems. The proposal received positive feedback and an invitation for future collaboration.</p>
+      </div>
+      <div class="panel">
+        <h3>Achievements</h3>
+        <p><strong>1st place</strong>, CTFQuest x GrootX (offline final), THIRAN 2026, Sri Eshwar College of Engineering, Feb 2026</p>
+        <p><strong>Participant</strong>, Technex'26 CTF, a 12-hour online CTF with 1,200+ participants, IIT BHU Varanasi</p>
+      </div>
+      <div class="panel">
+        <h3>Education</h3>
+        <p><strong>B.Tech, Information Technology</strong></p>
+        <p>KPR Institute of Engineering and Technology, Coimbatore · 2024 to present</p>
+        <p style="color:var(--mute)">Vel International Public School (CBSE): Class XII 85.4%, Class X 89.4%</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <p class="sub">Grouped by the work they are for.</p>
+    <div class="skills">
+      <div class="panel"><h3>LLMs and agents</h3><p>Prompting, structured outputs (Pydantic), multi-model orchestration, RAG, persistent memory, LangChain, Claude, Gemini, Groq and Ollama APIs</p></div>
+      <div class="panel"><h3>Retrieval and ranking</h3><p>Sentence-transformer and nomic-embed-text embeddings, ChromaDB vector search, LightGBM</p></div>
+      <div class="panel"><h3>Python backends and APIs</h3><p>Python, FastAPI, Flask, Pydantic, REST APIs; also TypeScript, Node.js, Next.js, React</p></div>
+      <div class="panel"><h3>SQL and data</h3><p>PostgreSQL, SQL, schema design, Drizzle ORM, Redis/Valkey</p></div>
+      <div class="panel"><h3>Shipping</h3><p>Docker Compose, GitHub Actions CI/CD, AWS, Cloudflare, Linux, Git, code review, Playwright, integration testing</p></div>
+      <div class="panel"><h3>Security and AI tools</h3><p>OWASP Top 10, rate limiting, CSP, CTF; Claude Code and Antigravity for AI-native development</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="band" id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Open to AI and backend internships</h2>
+      <p>Email <a class="mail" href="mailto:nagulli1912@gmail.com">nagulli1912@gmail.com</a></p>
+    </div>
+    <div class="links">
+      <a class="btn solid" href="https://github.com/Nagul-7">GitHub</a>
+      <a class="btn" href="https://linkedin.com/in/nagul-k-8888a5328">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
